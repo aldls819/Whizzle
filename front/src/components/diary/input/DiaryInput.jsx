@@ -12,7 +12,7 @@ const SDiv = styled.div`
   border-radius: 8px;
   display: inline-block;
   width: 460px;
-  height: 580px;
+  height: 650px;
   margin: 0 10px;
   text-align: left;
   padding: 40px 60px 40px 40px;
@@ -22,6 +22,7 @@ const SDiv = styled.div`
 //input 최상단 component
 const DiaryInput = ({ selectedDate }) => {
   const [data, setData] = useState([]);
+  const [currentComponent, setCurrentComponent] = useState("diaryEditor");
 
   const today = selectedDate;
 
@@ -38,8 +39,9 @@ const DiaryInput = ({ selectedDate }) => {
   };
 
   const onRemove = (today) => {
-    const newDiaryContent = data.filter((it) => it.id !== today);
+    const newDiaryContent = data.filter((it) => it.id === today);
     setData(newDiaryContent);
+    setCurrentComponent("diaryEditor");
   };
 
   const onEdit = (today, newContent) => {
@@ -49,7 +51,12 @@ const DiaryInput = ({ selectedDate }) => {
   return (
     <>
       <SDiv>
-        <DiaryEditor onCreate={onCreate} today={today} />
+        <DiaryEditor
+          onCreate={onCreate}
+          today={today}
+          currentComponent={currentComponent}
+          setCurrentComponent={setCurrentComponent}
+        />
         <DiaryNewContent onEdit={onEdit} onRemove={onRemove} diaryContent={data} today={today} />
       </SDiv>
     </>
