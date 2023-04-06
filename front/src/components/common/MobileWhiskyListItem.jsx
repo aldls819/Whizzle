@@ -20,7 +20,7 @@ const SCard = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 43vw;
-  height: 45vh;
+  height: 40vh;
   border: 1px solid #d8d8d8;
   border-radius: 16px;
   padding-top: 10vh;
@@ -37,15 +37,15 @@ const STop = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  padding-right: 18px;
-  gap: 25px;
-  width: 50vw;
+  padding-right: 5vw;
+  gap: 10px;
+  width: 35vw;
 `;
 
 const SContainer = styled.div`
-  left: 23px;
-  width: 90px;
-  height: 225px;
+  left: 2vw;
+  width: 20vw;
+  height: 26vh;
   text-align: center;
   position: absolute;
 `;
@@ -66,15 +66,16 @@ const SImg = styled.img`
 const SRight = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
   padding-right: 0px;
-  min-width: 105px;
+  margin-bottom: 4vh;
+  min-width: 2vw;
 `;
 
 const SLikeImg = styled.img`
-  height: 32px;
+  height: 4vh;
   transition: 0.5s;
   z-index: 2;
 
@@ -92,24 +93,28 @@ const SRating = styled.div`
 `;
 
 const SAvg = styled.p`
-  font-size: 24px;
+  font-size: 1rem;
   font-weight: 300;
   margin: 0;
 `;
 
 const SName = styled.div`
-  min-height: 80px;
-  font-size: 16px;
+  min-height: 10vh;
+  font-size: 0.8em;
   font-weight: bold;
   line-height: 19px;
   display: flex;
   align-items: center;
   text-align: center;
-  padding-left: 25px;
-  padding-right: 25px;
 `;
 
-const WhiskyListItem = (props) => {
+const SP = styled.p`
+  font-size: 0.8rem;
+  margin-right: 1vw;
+  font-weight: 300;
+`;
+
+const MobileWhiskyListItem = (props) => {
   const navigate = useNavigate();
   const [isKeep, setIsKeep] = useState(props.whisky.isKept);
   const [resultValue, setResultValue] = useRecoilState(recommendResult);
@@ -185,11 +190,11 @@ const WhiskyListItem = (props) => {
               count={5}
               value={Math.round(props.whisky.avgRating * 2) / 2}
               edit={false}
-              size={20}
+              size={5}
               color1={"rgba(128, 128, 128, 0.2)"}
               color2={"#F84F5A"}
             />
-            <p style={{ margin: 0 }}>{props.whisky.reviewCount} rating(s)</p>
+            <SP style={{ margin: 0 }}>{props.whisky.reviewCount} rating(s)</SP>
           </SRating>
         </SRight>
       </STop>
@@ -198,4 +203,4 @@ const WhiskyListItem = (props) => {
   );
 };
 
-export default WhiskyListItem;
+export default MobileWhiskyListItem;
