@@ -7,7 +7,8 @@ import com.bear.whizzle.keep.controller.dto.KeepSearchCondition;
 import com.bear.whizzle.whisky.repository.projection.dto.QWhiskySimpleResponseDto;
 import com.bear.whizzle.whisky.repository.projection.dto.WhiskySimpleResponseDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.JPAExpressions;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,11 +56,11 @@ public class KeepProjectionRepository {
                                    );
     }
 
-    private JPAQuery<LocalDateTime> queryCreatedDateTimeByMemberIdAndLastOffset(KeepSearchCondition searchCondition) {
-        return queryFactory.select(keep.createdDateTime)
-                           .from(keep)
-                           .where(keep.member.id.eq(searchCondition.getMemberId()),
-                                  keep.whisky.id.eq(searchCondition.getLastOffset()));
+    private JPQLQuery<LocalDateTime> queryCreatedDateTimeByMemberIdAndLastOffset(KeepSearchCondition searchCondition) {
+        return JPAExpressions.select(keep.createdDateTime)
+                             .from(keep)
+                             .where(keep.member.id.eq(searchCondition.getMemberId()),
+                                    keep.whisky.id.eq(searchCondition.getLastOffset()));
     }
 
     private SliceImpl<WhiskySimpleResponseDto> checkLastPage(Pageable pageable, List<WhiskySimpleResponseDto> content) {
